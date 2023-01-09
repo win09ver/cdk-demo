@@ -12,7 +12,7 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npm run test`    perform the jest unit tests
 * `cdk deploy`      deploy this stack to your default AWS account/region
    cdk deploy --parameters <var>=8
-   
+
 * `cdk synth`       emits the synthesized CloudFormation template
 
 * `cdk list`       list all stacks
@@ -24,3 +24,6 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
 
 
+## set up
+#lambda types
+yarn add @types/aws-lambda
