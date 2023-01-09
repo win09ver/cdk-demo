@@ -11,5 +11,16 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npm run watch`   watch for changes and compile
 * `npm run test`    perform the jest unit tests
 * `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
+   cdk deploy --parameters <var>=8
+   
 * `cdk synth`       emits the synthesized CloudFormation template
+
+* `cdk list`       list all stacks
+* `cdk diff`        compare deployed stack with current state
+* `cdk destroy <stackname>`       delete stack
+* `cdk doctor`       env check
+
+## API refe rence
+https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
+
+
