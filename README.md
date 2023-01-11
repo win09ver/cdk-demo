@@ -27,3 +27,45 @@ https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
 ## set up
 #lambda types
 yarn add @types/aws-lambda
+
+#compile ts to js locally
+yarn add --dev esbuild@0
+
+#install sdk to get info from aws
+yarn add aws-sdk
+
+#debugger
+.vscode/
+  - launch.json 
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug local file",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "args": ["${relativeFile}"],
+      "env": {
+        "AWS_REGION": "ap-northeast-1"
+      },
+      "program": "${file}"
+    }
+  ]
+}
+```
+#install amplify for auth
+yarn add aws-amplify @aws-amplify/auth
+
+## cognito memo
+pool-id: ap-northeast-1_CCAUAO7e0
+
+domain name: doublepann
+
+add client name: my-add-client/ id: 124oegljasu7smhjcd2vbqjca9
+
+add user
+
+#confirmed pw
+aws cognito-idp admin-set-user-password --user-pool-id ap-northeast-1_iQFKr2JKM --username doublepann --password "******" --permanent

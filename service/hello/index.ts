@@ -1,29 +1,27 @@
-// js
-// exports.main = async function hello (event,context) {
-//   return {
-//     statusCode: 200,
-//     body: 'hello from lambda'
-//   }
-// }
+import { APIGatewayProxyEvent } from "aws-lambda";
 
-// ts
-import {
-  APIGatewayEventRequestContextV2,
-  APIGatewayProxyEventV2,
-  APIGatewayProxyResultV2,
-} from 'aws-lambda';
-
-export const handler = async (
-  event: APIGatewayProxyEventV2,
-  context: APIGatewayEventRequestContextV2,
-): Promise<APIGatewayProxyResultV2> => {
-  const responseBody = {
-    message: 'Hello lambda!',
-  };
-
+export const hello = async (
+  event: APIGatewayProxyEvent,
+  context: any,
+) => {
+  const isAuthorized = (event: APIGatewayProxyEvent) => {
+    const group = event.requestContext.authorizer?.claims["cognito:groups"]
+    console.log(group)
+    if (group) {
+      return (group as string).includes("admins")
+    }
+    return false
+  }
+  if (isAuthorized(event)) {
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(event),
+    };
+  }
   return {
-    statusCode: 200,
+    statusCode: 401,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(responseBody),
+    body: JSON.stringify("u r not authorized"),
   };
 };

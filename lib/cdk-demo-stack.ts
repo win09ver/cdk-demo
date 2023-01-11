@@ -1,28 +1,25 @@
-import { CfnOutput, CfnParameter, Duration, Stack, StackProps } from 'aws-cdk-lib';
-import * as sns from 'aws-cdk-lib/aws-sns';
-import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
-import * as s3 from 'aws-cdk-lib/aws-s3';
-import { Construct, Node } from 'constructs';
-import { Code, Function as LambdaFunction, Runtime} from 'aws-cdk-lib/aws-lambda'
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import { Runtime} from 'aws-cdk-lib/aws-lambda'
 import { join } from 'path';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
 
 export class CdkDemoStack extends Stack {
+
+  private api = new RestApi(this, 'SpaceApi')
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
+    // Lambda use ts
+    const helloLambda = new NodejsFunction(this, 'helloLambda', {
+      entry: join(__dirname, '../service/hello/index.ts'),  // lambda 関数のエントリーポイント
+      handler: 'hello', // 実行する関数名
+      runtime: Runtime.NODEJS_16_X,
+    });
 
-    // const helloLambda = new LambdaFunction(this, 'helloLambda', {
-    //   runtime: Runtime.NODEJS_16_X,
-    //   code: Code.fromAsset(join(__dirname, '../service/hello')),
-    //   handler: 'hello.main'
-    // })
-
-  // Lambda
-   const helloLambda = new NodejsFunction(this, 'helloLambda', {
-     entry: join(__dirname, '../service/hello/index.ts'),  // lambda 関数のエントリーポイント
-     handler: 'handler', // 実行する関数名
-     runtime: Runtime.NODEJS_16_X,
-   });
+    // integrate lambda with apigetway
+    const helloLambdaIntergration = new LambdaIntegration(helloLambda)
+    const helloResource = this.api.root.addResource('hello')
+    helloResource.addMethod('GET', helloLambdaIntergration)
   }
 }
