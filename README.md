@@ -1,4 +1,6 @@
 # Welcome to your CDK TypeScript project
+# study use Google 「Code with AWS and Typescript by creating serverless projects with CDK, CloudFormation, Cognito, Lambda and AWS Amplify」
+# Thanks udemy
 
 You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`CdkDemoStack`)
 which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
