@@ -1,0 +1,25 @@
+@endpoint = https://c06h6oldeh.execute-api.ap-northeast-1.amazonaws.com/prod/
+#id token
+@token = eyJraWQiOiJKNURwNStqXC9EZ0J5TU1QTG80TzlDaDN4bTh0VGdGSGVEYmlvVmtqNVNcL0U9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3OWY3ZmU1OC04MDY3LTQzNjYtOWExNi01ZmFjMjUzNTAwYzQiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb21cL2FwLW5vcnRoZWFzdC0xX2lRRktyMkpLTSIsImNvZ25pdG86dXNlcm5hbWUiOiJ3cHAiLCJvcmlnaW5fanRpIjoiNzc0YTM4YWItNTc1Mi00MWYzLTk5NGUtNzdjNmUxYjI0ZmQ1IiwiYXVkIjoiNTBndGdsMjk2cG9xMXExZDF1aDNqczllZ2wiLCJldmVudF9pZCI6ImE0YWQ3YzIwLTZmYjUtNDg3OC1hODhmLTU4MmEyMzM5YjkxYSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjczMzk4Mjg5LCJleHAiOjE2NzM0MDE4ODksImlhdCI6MTY3MzM5ODI4OSwianRpIjoiOTMyMmQ1MTgtMGI1My00ZjA0LTgzODgtMGYzMzkzODY0ODhjIiwiZW1haWwiOiJ3aW4wOXZlckBob3RtYWlsLmNvbSJ9.UAzfBZ-AAyGBjuLOWMMxczBH8VWw2cAx1t0SoC74R9fVoslt7HZJubk40VA6NiDEtUgH-A-mqG99h7BSZqImc7pr3ij3f8F7Oeo68SDHACW2aSgesWkEIrv4d0ADNa2bsejnMKwZDvY-ckMUQsY_EJFhAe5e2gUyHJ0WnqJdGKqxz-MWR5UwaQo2TMoqIvg83H1eZwIx0Mi0oWayMIb9aV5zs6vO4d_S-s8c5Hg8vMsLIUL1xoOt8izmOHASV-rmjtN8VhJ2Mtc0k7LTlX9MTHTwPTrq_mLBGpR8QNClG4LKfXZ011NOIMx_djJpcnUzPznNcUvV8lUsypwnGb0Wgg
+GET {{endpoint}}/hello
+Authorization: {{token}}
+
+
+### post test
+POST {{endpoint}}/spaces/
+Content-Type: application/json
+
+{
+  "location": "TOKYO1",
+  "description": "NICE!!"
+}
+### get all datas
+GET {{endpoint}}/spaces 
+Authorization: {{token}}
+
+### pk test
+GET {{endpoint}}/spaces?spaceId=e674d333-1420-4afd-8085-070db67f3269
+
+
+### sec key test
+GET {{endpoint}}/spaces?location=TOKYO1
